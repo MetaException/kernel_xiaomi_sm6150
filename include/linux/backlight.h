@@ -4,7 +4,6 @@
  *
  * Copyright (C) 2003,2004 Hewlett-Packard Company
  * Copyright (C) 2020 XiaoMi, Inc.
- *
  */
 
 #ifndef _LINUX_BACKLIGHT_H
@@ -78,6 +77,7 @@ struct backlight_properties {
 	int brightness;
 	/* Maximal value for brightness (read-only) */
 	int max_brightness;
+	int brightness_clone;
 	/* Current FB Power mode (0: full on, 1..3: power saving
 	   modes; 4: full off), see FB_BLANK_XXX */
 	int power;
