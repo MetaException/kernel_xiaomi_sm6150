@@ -710,16 +710,11 @@ static u32 interpolate(uint32_t x, uint32_t xa, uint32_t xb, uint32_t ya, uint32
 
 u32 dsi_panel_get_fod_dim_alpha(struct dsi_panel *panel)
 {
-	u32 brightness;
+	u32 brightness = dsi_panel_get_backlight(panel);
 	int i;
-
-	if (panel->hbm_mode)
-		return 0;
 
 	if (!panel->fod_dim_lut)
 		return 0;
-
-	brightness = dsi_panel_get_backlight(panel);
 
 	for (i = 0; i < panel->fod_dim_lut_count; i++)
 		if (panel->fod_dim_lut[i].brightness >= brightness)
@@ -783,9 +778,6 @@ int dsi_panel_set_doze_mode(struct dsi_panel *panel, enum dsi_doze_mode_type mod
 int dsi_panel_set_fod_hbm(struct dsi_panel *panel, bool status)
 {
 	int rc = 0;
-
-	if (panel->hbm_mode)
-		return rc;
 
 	if (status) {
 		rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_DISP_HBM_FOD_ON);
